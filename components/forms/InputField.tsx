@@ -16,6 +16,11 @@ interface FormInputProps {
     value?: string;
 }
 
+/**
+ * Reusable form input field component with label, validation error display, and react-hook-form integration.
+ * @param {FormInputProps} props - Component props including name, label, register, error, and validation options
+ * @returns {JSX.Element} Rendered input field with label and error message
+ */
 const InputField = ({
                         name,
                         label,

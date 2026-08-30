@@ -7,6 +7,13 @@ import { cache } from 'react';
 const FINNHUB_BASE_URL = 'https://finnhub.io/api/v1';
 const NEXT_PUBLIC_FINNHUB_API_KEY = process.env.NEXT_PUBLIC_FINNHUB_API_KEY ?? '';
 
+/**
+ * Fetches JSON data from a URL with optional caching and revalidation.
+ * @param {string} url - The URL to fetch data from
+ * @param {number} [revalidateSeconds] - Optional number of seconds to cache the response before revalidating
+ * @returns {Promise<T>} The parsed JSON response
+ * @throws {Error} If the fetch request fails
+ */
 async function fetchJSON<T>(url: string, revalidateSeconds?: number): Promise<T> {
     const options: RequestInit & { next?: { revalidate?: number } } = revalidateSeconds
         ? { cache: 'force-cache', next: { revalidate: revalidateSeconds } }
@@ -22,6 +29,12 @@ async function fetchJSON<T>(url: string, revalidateSeconds?: number): Promise<T>
 
 export { fetchJSON };
 
+/**
+ * Retrieves market news articles, optionally filtered by stock symbols using company news or general market news as fallback.
+ * @param {string[]} [symbols] - Optional array of stock symbols to fetch company-specific news
+ * @returns {Promise<MarketNewsArticle[]>} Array of up to 6 formatted market news articles sorted by date
+ * @throws {Error} If news fetch fails
+ */
 export async function getNews(symbols?: string[]): Promise<MarketNewsArticle[]> {
     try {
         const range = getDateRange(5);
@@ -98,6 +111,11 @@ export async function getNews(symbols?: string[]): Promise<MarketNewsArticle[]> 
     }
 }
 
+/**
+ * Searches for stocks by query string or returns popular stocks if no query is provided. Results are cached.
+ * @param {string} [query] - Optional search query string to find matching stocks
+ * @returns {Promise<StockWithWatchlistStatus[]>} Array of up to 15 stock results with symbol, name, exchange, type, and watchlist status
+ */
 export const searchStocks = cache(async (query?: string): Promise<StockWithWatchlistStatus[]> => {
     try {
         const token = process.env.FINNHUB_API_KEY ?? NEXT_PUBLIC_FINNHUB_API_KEY;

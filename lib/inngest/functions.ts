@@ -18,6 +18,9 @@ interface MarketNewsArticle {
     url?: string;
 }
 
+/**
+ * Inngest function that sends a personalized welcome email to new users after sign-up, using AI to generate customized intro text based on user profile.
+ */
 export const sendSignUpEmail = inngest.createFunction(
     {
         id: 'sign-up-email',
@@ -61,6 +64,10 @@ export const sendSignUpEmail = inngest.createFunction(
     }
 );
 
+/**
+ * Inngest function that sends daily personalized news summaries to all users, fetching news based on their watchlists and using AI to generate summaries.
+ * Runs daily at 12:00 UTC via cron schedule or can be triggered manually via 'app/send.daily.news' event.
+ */
 export const sendDailyNewsSummary = inngest.createFunction(
     {
         id: 'daily-news-summary',

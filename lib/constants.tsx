@@ -170,6 +170,11 @@ export const MARKET_DATA_WIDGET_CONFIG = {
     ],
 };
 
+/**
+ * Generates TradingView symbol info widget configuration for a specific stock symbol.
+ * @param {string} symbol - Stock symbol to display information for
+ * @returns {object} Configuration object for TradingView symbol info widget
+ */
 export const SYMBOL_INFO_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
     colorTheme: 'dark',
@@ -179,6 +184,11 @@ export const SYMBOL_INFO_WIDGET_CONFIG = (symbol: string) => ({
     height: 170,
 });
 
+/**
+ * Generates TradingView candlestick chart widget configuration for a specific stock symbol.
+ * @param {string} symbol - Stock symbol to display in the chart
+ * @returns {object} Configuration object for TradingView candle chart widget
+ */
 export const CANDLE_CHART_WIDGET_CONFIG = (symbol: string) => ({
     allow_symbol_change: false,
     calendar: false,
@@ -205,6 +215,11 @@ export const CANDLE_CHART_WIDGET_CONFIG = (symbol: string) => ({
     height: 600,
 });
 
+/**
+ * Generates TradingView baseline chart widget configuration for a specific stock symbol.
+ * @param {string} symbol - Stock symbol to display in the baseline chart
+ * @returns {object} Configuration object for TradingView baseline widget
+ */
 export const BASELINE_WIDGET_CONFIG = (symbol: string) => ({
     allow_symbol_change: false,
     calendar: false,
@@ -231,6 +246,11 @@ export const BASELINE_WIDGET_CONFIG = (symbol: string) => ({
     height: 600,
 });
 
+/**
+ * Generates TradingView technical analysis widget configuration for a specific stock symbol.
+ * @param {string} symbol - Stock symbol to display technical analysis for
+ * @returns {object} Configuration object for TradingView technical analysis widget
+ */
 export const TECHNICAL_ANALYSIS_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
     colorTheme: 'dark',
@@ -242,6 +262,11 @@ export const TECHNICAL_ANALYSIS_WIDGET_CONFIG = (symbol: string) => ({
     largeChartUrl: '',
 });
 
+/**
+ * Generates TradingView company profile widget configuration for a specific stock symbol.
+ * @param {string} symbol - Stock symbol to display company profile for
+ * @returns {object} Configuration object for TradingView company profile widget
+ */
 export const COMPANY_PROFILE_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
     colorTheme: 'dark',
@@ -251,6 +276,11 @@ export const COMPANY_PROFILE_WIDGET_CONFIG = (symbol: string) => ({
     height: 440,
 });
 
+/**
+ * Generates TradingView company financials widget configuration for a specific stock symbol.
+ * @param {string} symbol - Stock symbol to display financial data for
+ * @returns {object} Configuration object for TradingView company financials widget
+ */
 export const COMPANY_FINANCIALS_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
     colorTheme: 'dark',

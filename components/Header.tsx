@@ -4,6 +4,12 @@ import NavItems from "@/components/NavItems";
 import UserDropdown from "@/components/UserDropdown";
 import {searchStocks} from "@/lib/actions/finnhub.actions";
 
+/**
+ * Main application header component with logo, navigation, and user dropdown menu. Server component that fetches initial stock data.
+ * @param {object} props - Component props
+ * @param {User} props.user - Authenticated user object
+ * @returns {Promise<JSX.Element>} Rendered header with navigation and user controls
+ */
 const Header = async ({ user }: { user: User }) => {
     const initialStocks = await searchStocks();
 

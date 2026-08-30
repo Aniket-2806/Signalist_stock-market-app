@@ -28,6 +28,13 @@ type CountrySelectProps = {
     required?: boolean;
 };
 
+/**
+ * Country selection dropdown component with flag emojis and search functionality.
+ * @param {object} props - Component props
+ * @param {string} props.value - Currently selected country code
+ * @param {function} props.onChange - Callback function when country selection changes
+ * @returns {JSX.Element} Rendered country select popover with searchable list
+ */
 const CountrySelect = ({
                            value,
                            onChange,
@@ -106,6 +113,11 @@ const CountrySelect = ({
     );
 };
 
+/**
+ * Form field wrapper for country selection with react-hook-form integration, label, and validation.
+ * @param {CountrySelectProps} props - Component props including name, label, control, error, and required flag
+ * @returns {JSX.Element} Rendered country select field with label, validation, and helper text
+ */
 export const CountrySelectField = ({
                                        name,
                                        label,

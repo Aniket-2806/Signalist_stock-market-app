@@ -8,6 +8,11 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
+/**
+ * Reusable form select dropdown component with label, validation, and react-hook-form integration.
+ * @param {SelectFieldProps} props - Component props including name, label, placeholder, options, control, error, and required flag
+ * @returns {JSX.Element} Rendered select dropdown with label and error message
+ */
 const SelectField = ({ name, label, placeholder, options, control, error, required = false }: SelectFieldProps) => {
     return (
         <div className="space-y-2">

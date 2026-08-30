@@ -2,6 +2,13 @@
 
 import { useEffect, useRef } from "react";
 
+/**
+ * React hook for embedding TradingView widgets by dynamically loading and configuring the widget script.
+ * @param {string} scriptUrl - URL to the TradingView widget script
+ * @param {Record<string, unknown>} config - Configuration object for the TradingView widget
+ * @param {number} [height=600] - Height of the widget container in pixels
+ * @returns {React.RefObject<HTMLDivElement | null>} Ref to attach to the container div element
+ */
 const useTradingViewWidget = (scriptUrl: string, config: Record<string, unknown>, height = 600) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
 

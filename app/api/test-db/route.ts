@@ -2,6 +2,10 @@
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/database/mongoose";
 
+/**
+ * API route handler to test MongoDB database connectivity.
+ * @returns {Promise<NextResponse>} JSON response indicating connection success or error details
+ */
 export async function GET() {
     try {
         await connectToDatabase();

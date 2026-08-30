@@ -13,6 +13,13 @@ import { LogOut } from "lucide-react";
 import NavItems from "@/components/NavItems";
 import { signOut } from "@/lib/actions/auth.action";
 
+/**
+ * User dropdown menu component displaying user profile, navigation on mobile, and sign-out functionality.
+ * @param {object} props - Component props
+ * @param {User} props.user - Authenticated user object with name and email
+ * @param {StockWithWatchlistStatus[]} props.initialStocks - Initial stock data for navigation
+ * @returns {JSX.Element} Rendered user dropdown menu with avatar and actions
+ */
 const UserDropdown = ({ user, initialStocks }: { user: User; initialStocks: StockWithWatchlistStatus[] }) => {
     const handleSignOut = async () => {
         try {

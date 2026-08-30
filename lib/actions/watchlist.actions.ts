@@ -3,6 +3,11 @@
 import { connectToDatabase } from '@/database/mongoose';
 import { Watchlist } from '@/database/models/watchlist.model';
 
+/**
+ * Fetches all stock symbols from a user's watchlist based on their email address.
+ * @param {string} email - The user's email address
+ * @returns {Promise<string[]>} Array of stock symbols from the user's watchlist, or empty array if user not found or on error
+ */
 export async function getWatchlistSymbolsByEmail(email: string): Promise<string[]> {
     if (!email) return [];
 

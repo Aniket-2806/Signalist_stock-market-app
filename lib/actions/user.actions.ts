@@ -2,6 +2,10 @@
 
 import { connectToDatabase } from "@/database/mongoose";
 
+/**
+ * Retrieves all users with valid email addresses from the database for sending news email notifications.
+ * @returns {Promise<Array<{id: string, email: string, name: string}>>} Array of user objects with id, email, and name, or empty array on error
+ */
 export const getAllUsersForNewsEmail = async () => {
     try {
         const mongoose = await connectToDatabase();

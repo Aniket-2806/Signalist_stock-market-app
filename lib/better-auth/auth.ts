@@ -9,6 +9,9 @@ const db = mongoose.connection.db;
 
 if (!db) throw new Error("MongoDB connection not found");
 
+/**
+ * Better Auth instance configured with MongoDB adapter and email/password authentication for the Signalist application.
+ */
 export const auth = betterAuth({
     database: mongodbAdapter(db as any),
     secret: process.env.BETTER_AUTH_SECRET || "DPjT1chzKAehPUxD5L997SGQiEFZx6iY",

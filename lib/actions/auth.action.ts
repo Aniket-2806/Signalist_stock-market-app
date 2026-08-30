@@ -4,6 +4,11 @@ import { auth } from "@/lib/better-auth/auth";
 import { inngest } from "@/lib/inngest/client";
 import { headers } from "next/headers";
 
+/**
+ * Handles user registration with email and password, creating a new account and triggering a welcome email workflow.
+ * @param {SignUpFormData} params - The sign-up form data including email, password, full name, country, investment goals, risk tolerance, and preferred industry
+ * @returns {Promise<{success: boolean, data?: any, error?: string}>} Result object indicating success or failure with optional data or error message
+ */
 export const signUpWithEmail = async ({
                                           email,
                                           password,
@@ -33,6 +38,11 @@ export const signUpWithEmail = async ({
     }
 };
 
+/**
+ * Authenticates a user with email and password credentials.
+ * @param {SignInFormData} params - The sign-in credentials containing email and password
+ * @returns {Promise<{success: boolean, data?: any, error?: string}>} Result object indicating authentication success or failure
+ */
 export const signInWithEmail = async ({ email, password }: SignInFormData) => {
     try {
         const response = await auth.api.signInEmail({
@@ -47,6 +57,10 @@ export const signInWithEmail = async ({ email, password }: SignInFormData) => {
     }
 };
 
+/**
+ * Signs out the currently authenticated user and clears their session.
+ * @returns {Promise<{success: boolean, error?: string}>} Result object indicating sign-out success or failure
+ */
 export const signOut = async () => {
     try {
         await auth.api.signOut({

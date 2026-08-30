@@ -12,6 +12,12 @@ interface TradingViewWidgetProps {
     className?: string;
 }
 
+/**
+ * Wrapper component for rendering TradingView widgets with optional title and customizable styling.
+ * Component is memoized for performance optimization.
+ * @param {TradingViewWidgetProps} props - Component props including title, scriptUrl, config, height, and className
+ * @returns {JSX.Element} Rendered TradingView widget container with title
+ */
 const TradingViewWidget = ({
                                title,
                                scriptUrl,

@@ -4,6 +4,10 @@ import { NAV_ITEMS } from "@/lib/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+/**
+ * Navigation items component that renders a list of navigation links with active state highlighting.
+ * @returns {JSX.Element} Rendered navigation menu with highlighted active links
+ */
 const NavItems = () => {
     const pathname: string = usePathname();
 

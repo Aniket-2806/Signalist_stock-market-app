@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 
+/**
+ * Next.js middleware that protects routes by checking for valid session cookies and redirecting unauthenticated users to the home page.
+ * @param {NextRequest} request - The incoming Next.js request object
+ * @returns {Promise<NextResponse>} Either continues to the requested page or redirects to home
+ */
 export async function middleware(request: NextRequest) {
     const sessionCookie = getSessionCookie(request);
 
