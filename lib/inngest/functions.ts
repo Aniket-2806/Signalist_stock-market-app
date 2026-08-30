@@ -20,8 +20,10 @@ interface MarketNewsArticle {
 }
 
 export const sendSignUpEmail = inngest.createFunction(
-    { id: 'sign-up-email' },
-    { event: 'app/user.created' },
+    {
+        id: 'sign-up-email',
+        event: 'app/user.created' // FIXED: Moved trigger into the first configuration object
+    },
     async ({ event, step }) => {
         const userProfile = `
             - Country: ${event.data.country}
@@ -33,7 +35,7 @@ export const sendSignUpEmail = inngest.createFunction(
         const prompt = PERSONALIZED_WELCOME_EMAIL_PROMPT.replace('{{userProfile}}', userProfile);
 
         const response = await step.ai.infer('generate-welcome-intro', {
-            model: step.ai.models.gemini({ model: 'gemini-2.5-flash-lite' }),
+            model: step.ai.models.gemini({ model: 'gemini-2.0-flash' }), // FIXED: Valid Gemini model name
             body: {
                 contents: [
                     {
@@ -63,8 +65,10 @@ export const sendSignUpEmail = inngest.createFunction(
 );
 
 export const sendDailyNewsSummary = inngest.createFunction(
-    { id: 'daily-news-summary' },
-    [{ event: 'app/send.daily.news' }, { cron: '0 12 * * *' }],
+    {
+        id: 'daily-news-summary',
+        triggers: [{ event: 'app/send.daily.news' }, { cron: '0 12 * * *' }]
+    },
     async ({ step }) => {
         // Step #1: Get all users for news delivery
         const users = await step.run('get-all-users', getAllUsersForNewsEmail);
@@ -102,7 +106,7 @@ export const sendDailyNewsSummary = inngest.createFunction(
                 const prompt = NEWS_SUMMARY_EMAIL_PROMPT.replace('{{newsData}}', JSON.stringify(articles, null, 2));
 
                 const response = await step.ai.infer(`summarize-news-${user.email}`, {
-                    model: step.ai.models.gemini({ model: 'gemini-2.5-flash-lite' }),
+                    model: step.ai.models.gemini({ model: 'gemini-2.0-flash' }), // FIXED: Valid Gemini model name
                     body: {
                         contents: [{ role: 'user', parts: [{ text: prompt }] }]
                     }

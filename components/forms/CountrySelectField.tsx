@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -16,7 +15,6 @@ import {
     CommandItem,
     CommandList,
 } from '@/components/ui/command';
-import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -39,10 +37,8 @@ const CountrySelect = ({
 }) => {
     const [open, setOpen] = useState(false);
 
-    // Get country options with flags
     const countries = countryList().getData();
 
-    // Helper function to get flag emoji
     const getFlagEmoji = (countryCode: string) => {
         const codePoints = countryCode
             .toUpperCase()
@@ -53,23 +49,18 @@ const CountrySelect = ({
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-                <Button
-                    variant='outline'
-                    role='combobox'
-                    aria-expanded={open}
-                    className='country-select-trigger'
-                >
-                    {value ? (
-                        <span className='flex items-center gap-2'>
-              <span>{getFlagEmoji(value)}</span>
-              <span>{countries.find((c) => c.value === value)?.label}</span>
-            </span>
-                    ) : (
-                        'Select your country...'
-                    )}
-                    <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
-                </Button>
+            <PopoverTrigger
+                className='flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 country-select-trigger'
+            >
+                {value ? (
+                    <span className='flex items-center gap-2'>
+                        <span>{getFlagEmoji(value)}</span>
+                        <span>{countries.find((c) => c.value === value)?.label}</span>
+                    </span>
+                ) : (
+                    'Select your country...'
+                )}
+                <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
             </PopoverTrigger>
             <PopoverContent
                 className='w-full p-0 bg-gray-800 border-gray-600'
@@ -102,9 +93,9 @@ const CountrySelect = ({
                                         )}
                                     />
                                     <span className='flex items-center gap-2'>
-                    <span>{getFlagEmoji(country.value)}</span>
-                    <span>{country.label}</span>
-                  </span>
+                                        <span>{getFlagEmoji(country.value)}</span>
+                                        <span>{country.label}</span>
+                                    </span>
                                 </CommandItem>
                             ))}
                         </CommandGroup>
