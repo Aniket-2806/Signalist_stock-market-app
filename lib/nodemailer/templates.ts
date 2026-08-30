@@ -1,3 +1,7 @@
+/**
+ * HTML email template for welcoming new users to Signalist.
+ * Contains placeholders for {{name}} and {{intro}} to be replaced with user-specific content.
+ */
 export const WELCOME_EMAIL_TEMPLATE = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -165,6 +169,10 @@ export const WELCOME_EMAIL_TEMPLATE = `<!DOCTYPE html>
 </body>
 </html>`;
 
+/**
+ * HTML email template for daily market news summaries.
+ * Contains placeholders for {{date}} and {{newsContent}} to be replaced with actual news data.
+ */
 export const NEWS_SUMMARY_EMAIL_TEMPLATE = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -304,6 +312,10 @@ export const NEWS_SUMMARY_EMAIL_TEMPLATE = `<!DOCTYPE html>
 </body>
 </html>`;
 
+/**
+ * HTML email template for stock price alerts when price exceeds upper threshold.
+ * Contains placeholders for {{symbol}}, {{company}}, {{currentPrice}}, {{targetPrice}}, {{timestamp}}.
+ */
 export const STOCK_ALERT_UPPER_EMAIL_TEMPLATE = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -513,6 +525,10 @@ export const STOCK_ALERT_UPPER_EMAIL_TEMPLATE = `<!DOCTYPE html>
 </body>
 </html>`;
 
+/**
+ * HTML email template for stock price alerts when price drops below lower threshold.
+ * Contains placeholders for {{symbol}}, {{company}}, {{currentPrice}}, {{targetPrice}}, {{timestamp}}.
+ */
 export const STOCK_ALERT_LOWER_EMAIL_TEMPLATE = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -722,6 +738,12 @@ export const STOCK_ALERT_LOWER_EMAIL_TEMPLATE = `<!DOCTYPE html>
 </body>
 </html>`;
 
+/**
+ * HTML email template for stock volume alerts when unusual trading volume is detected.
+ * Contains placeholders for {{symbol}}, {{company}}, {{currentVolume}}, {{currentPrice}},
+ * {{priceColor}}, {{changeDirection}}, {{changePercent}}, {{alertMessage}},
+ * {{averageVolume}}, {{volumeSpike}}, {{timestamp}}.
+ */
 export const VOLUME_ALERT_EMAIL_TEMPLATE = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -942,6 +964,10 @@ export const VOLUME_ALERT_EMAIL_TEMPLATE = `<!DOCTYPE html>
 </body>
 </html>`;
 
+/**
+ * HTML email template for re-engagement of inactive users.
+ * Contains placeholders for {{name}}, {{dashboardUrl}}, {{unsubscribeUrl}}.
+ */
 export const INACTIVE_USER_REMINDER_EMAIL_TEMPLATE = `<!DOCTYPE html>
 <html lang="en">
 <head>

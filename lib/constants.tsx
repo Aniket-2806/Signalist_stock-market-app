@@ -1,10 +1,15 @@
+/**
+ * Navigation menu items for the main application header.
+ */
 export const NAV_ITEMS = [
     { href: '/', label: 'Dashboard' },
     { href: '/search', label: 'Search' },
     // { href: '/watchlist', label: 'Watchlist' },
 ];
 
-// Sign-up form select options
+/**
+ * Available investment goal options for user sign-up form.
+ */
 export const INVESTMENT_GOALS = [
     { value: 'Growth', label: 'Growth' },
     { value: 'Income', label: 'Income' },
@@ -12,12 +17,18 @@ export const INVESTMENT_GOALS = [
     { value: 'Conservative', label: 'Conservative' },
 ];
 
+/**
+ * Risk tolerance level options for user sign-up form.
+ */
 export const RISK_TOLERANCE_OPTIONS = [
     { value: 'Low', label: 'Low' },
     { value: 'Medium', label: 'Medium' },
     { value: 'High', label: 'High' },
 ];
 
+/**
+ * Preferred industry sector options for user sign-up form.
+ */
 export const PREFERRED_INDUSTRIES = [
     { value: 'Technology', label: 'Technology' },
     { value: 'Healthcare', label: 'Healthcare' },
@@ -26,17 +37,26 @@ export const PREFERRED_INDUSTRIES = [
     { value: 'Consumer Goods', label: 'Consumer Goods' },
 ];
 
+/**
+ * Alert type options for stock price alerts (upper or lower threshold).
+ */
 export const ALERT_TYPE_OPTIONS = [
     { value: 'upper', label: 'Upper' },
     { value: 'lower', label: 'Lower' },
 ];
 
+/**
+ * Condition options for alert comparison operators.
+ */
 export const CONDITION_OPTIONS = [
     { value: 'greater', label: 'Greater than (>)' },
     { value: 'less', label: 'Less than (<)' },
 ];
 
-// TradingView Charts
+/**
+ * Configuration for TradingView Market Overview widget.
+ * Displays market data across Financial, Technology, and Services sectors.
+ */
 export const MARKET_OVERVIEW_WIDGET_CONFIG = {
     colorTheme: 'dark', // dark mode
     dateRange: '12M', // last 12 months
@@ -95,6 +115,9 @@ export const MARKET_OVERVIEW_WIDGET_CONFIG = {
     showChart: true, // display mini chart
 };
 
+/**
+ * Configuration for TradingView Heatmap widget showing S&P 500 market visualization.
+ */
 export const HEATMAP_WIDGET_CONFIG = {
     dataSource: 'SPX500',
     blockSize: 'market_cap_basic',
@@ -114,6 +137,9 @@ export const HEATMAP_WIDGET_CONFIG = {
     height: '600',
 };
 
+/**
+ * Configuration for TradingView Top Stories news feed widget.
+ */
 export const TOP_STORIES_WIDGET_CONFIG = {
     displayMode: 'regular',
     feedMode: 'market',
@@ -125,6 +151,9 @@ export const TOP_STORIES_WIDGET_CONFIG = {
     height: '600',
 };
 
+/**
+ * Configuration for TradingView Market Data widget with grouped stock symbols.
+ */
 export const MARKET_DATA_WIDGET_CONFIG = {
     title: 'Stocks',
     width: '100%',
@@ -170,6 +199,12 @@ export const MARKET_DATA_WIDGET_CONFIG = {
     ],
 };
 
+/**
+ * Generates configuration for TradingView Symbol Info widget for a specific stock symbol.
+ *
+ * @param symbol - Stock symbol to display information for
+ * @returns Widget configuration object
+ */
 export const SYMBOL_INFO_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
     colorTheme: 'dark',
@@ -179,6 +214,12 @@ export const SYMBOL_INFO_WIDGET_CONFIG = (symbol: string) => ({
     height: 170,
 });
 
+/**
+ * Generates configuration for TradingView candlestick chart widget for a specific stock symbol.
+ *
+ * @param symbol - Stock symbol to display chart for
+ * @returns Widget configuration object
+ */
 export const CANDLE_CHART_WIDGET_CONFIG = (symbol: string) => ({
     allow_symbol_change: false,
     calendar: false,
@@ -205,6 +246,12 @@ export const CANDLE_CHART_WIDGET_CONFIG = (symbol: string) => ({
     height: 600,
 });
 
+/**
+ * Generates configuration for TradingView baseline chart widget for a specific stock symbol.
+ *
+ * @param symbol - Stock symbol to display baseline chart for
+ * @returns Widget configuration object
+ */
 export const BASELINE_WIDGET_CONFIG = (symbol: string) => ({
     allow_symbol_change: false,
     calendar: false,
@@ -231,6 +278,12 @@ export const BASELINE_WIDGET_CONFIG = (symbol: string) => ({
     height: 600,
 });
 
+/**
+ * Generates configuration for TradingView technical analysis widget for a specific stock symbol.
+ *
+ * @param symbol - Stock symbol to display technical analysis for
+ * @returns Widget configuration object
+ */
 export const TECHNICAL_ANALYSIS_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
     colorTheme: 'dark',
@@ -242,6 +295,12 @@ export const TECHNICAL_ANALYSIS_WIDGET_CONFIG = (symbol: string) => ({
     largeChartUrl: '',
 });
 
+/**
+ * Generates configuration for TradingView company profile widget for a specific stock symbol.
+ *
+ * @param symbol - Stock symbol to display company profile for
+ * @returns Widget configuration object
+ */
 export const COMPANY_PROFILE_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
     colorTheme: 'dark',
@@ -251,6 +310,12 @@ export const COMPANY_PROFILE_WIDGET_CONFIG = (symbol: string) => ({
     height: 440,
 });
 
+/**
+ * Generates configuration for TradingView company financials widget for a specific stock symbol.
+ *
+ * @param symbol - Stock symbol to display financial data for
+ * @returns Widget configuration object
+ */
 export const COMPANY_FINANCIALS_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
     colorTheme: 'dark',
@@ -262,6 +327,10 @@ export const COMPANY_FINANCIALS_WIDGET_CONFIG = (symbol: string) => ({
     largeChartUrl: '',
 });
 
+/**
+ * List of popular stock symbols across various sectors including tech giants,
+ * growing tech companies, consumer apps, and international companies.
+ */
 export const POPULAR_STOCK_SYMBOLS = [
     // Tech Giants (the big technology companies)
     'AAPL',
@@ -324,9 +393,15 @@ export const POPULAR_STOCK_SYMBOLS = [
     'SE',
 ];
 
+/**
+ * Default HTML message displayed when no market news is available.
+ */
 export const NO_MARKET_NEWS =
     '<p class="mobile-text" style="margin:0 0 20px 0;font-size:16px;line-height:1.6;color:#4b5563;">No market news available today. Please check back tomorrow.</p>';
 
+/**
+ * Column headers for the watchlist table display.
+ */
 export const WATCHLIST_TABLE_HEADER = [
     'Company',
     'Symbol',

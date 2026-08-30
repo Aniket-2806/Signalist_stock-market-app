@@ -4,6 +4,20 @@ import { auth } from "@/lib/better-auth/auth";
 import { inngest } from "@/lib/inngest/client";
 import { headers } from "next/headers";
 
+/**
+ * Registers a new user with email and password authentication.
+ * Creates user account via Better Auth and triggers a welcome email workflow.
+ *
+ * @param params - Sign up form data containing user credentials and profile
+ * @param params.email - User's email address
+ * @param params.password - User's password
+ * @param params.fullName - User's full name
+ * @param params.country - User's country
+ * @param params.investmentGoals - User's investment goals
+ * @param params.riskTolerance - User's risk tolerance level
+ * @param params.preferredIndustry - User's preferred industry sector
+ * @returns Promise resolving to success status and response data or error message
+ */
 export const signUpWithEmail = async ({
                                           email,
                                           password,
@@ -33,6 +47,14 @@ export const signUpWithEmail = async ({
     }
 };
 
+/**
+ * Authenticates an existing user with email and password.
+ *
+ * @param params - Sign in form data
+ * @param params.email - User's email address
+ * @param params.password - User's password
+ * @returns Promise resolving to success status and response data or error message
+ */
 export const signInWithEmail = async ({ email, password }: SignInFormData) => {
     try {
         const response = await auth.api.signInEmail({
@@ -47,6 +69,11 @@ export const signInWithEmail = async ({ email, password }: SignInFormData) => {
     }
 };
 
+/**
+ * Signs out the currently authenticated user and clears their session.
+ *
+ * @returns Promise resolving to success status or error message
+ */
 export const signOut = async () => {
     try {
         await auth.api.signOut({

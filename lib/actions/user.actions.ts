@@ -3,6 +3,12 @@
 
 import { connectToDatabase } from "@/database/mongoose";
 
+/**
+ * Retrieves all users who should receive daily news email updates.
+ * Currently returns an empty array as a placeholder until user query is implemented.
+ *
+ * @returns Promise resolving to an array of user objects for news email delivery
+ */
 export async function getAllUsersForNewsEmail() {
     try {
         await connectToDatabase();

@@ -16,6 +16,22 @@ interface FormInputProps {
     value?: string;
 }
 
+/**
+ * Reusable form input field component with label, validation, and error display.
+ * Integrates with React Hook Form for form state management.
+ *
+ * @param props - Input field properties
+ * @param props.name - Field name for form registration
+ * @param props.label - Display label for the input
+ * @param props.placeholder - Placeholder text
+ * @param props.type - Input type (default: "text")
+ * @param props.register - React Hook Form register function
+ * @param props.error - Field error object from validation
+ * @param props.validation - Validation rules for the field
+ * @param props.disabled - Whether the input is disabled
+ * @param props.value - Controlled value for the input
+ * @returns Rendered input field with label and error message
+ */
 const InputField = ({
                         name,
                         label,

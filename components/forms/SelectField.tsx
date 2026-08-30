@@ -8,6 +8,20 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
+/**
+ * Reusable form select field component with label, validation, and error display.
+ * Uses Base UI Select component and integrates with React Hook Form Controller.
+ *
+ * @param props - Select field properties
+ * @param props.name - Field name for form registration
+ * @param props.label - Display label for the select
+ * @param props.placeholder - Placeholder text
+ * @param props.options - Array of option objects with value and label
+ * @param props.control - React Hook Form control object
+ * @param props.error - Field error object from validation
+ * @param props.required - Whether the field is required (default: false)
+ * @returns Rendered select field with label and error message
+ */
 const SelectField = ({ name, label, placeholder, options, control, error, required = false }: SelectFieldProps) => {
     return (
         <div className="space-y-2">

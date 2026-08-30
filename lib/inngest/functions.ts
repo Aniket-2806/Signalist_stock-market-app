@@ -19,6 +19,14 @@ interface MarketNewsArticle {
     url?: string;
 }
 
+/**
+ * Inngest function that sends a personalized welcome email to newly registered users.
+ * Generates customized email content based on user profile using AI, then sends via nodemailer.
+ *
+ * @remarks
+ * Triggered by the 'app/user.created' event when a new user signs up.
+ * Uses Gemini AI to generate personalized welcome message based on user's investment profile.
+ */
 export const sendSignUpEmail = inngest.createFunction(
     {
         id: 'sign-up-email',
@@ -64,6 +72,14 @@ export const sendSignUpEmail = inngest.createFunction(
     }
 );
 
+/**
+ * Inngest function that sends daily market news summaries to all active users.
+ * Fetches personalized news based on user watchlists, summarizes with AI, and emails them.
+ *
+ * @remarks
+ * Triggered by 'app/send.daily.news' event or cron schedule at 12:00 PM daily.
+ * Generates AI-powered news summaries using Gemini and limits to 6 articles per user.
+ */
 export const sendDailyNewsSummary = inngest.createFunction(
     {
         id: 'daily-news-summary',

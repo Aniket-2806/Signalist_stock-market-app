@@ -1,3 +1,8 @@
+/**
+ * AI prompt template for generating personalized welcome email introductions.
+ * Used with Gemini to create custom greetings based on user investment profile.
+ * Expects {{userProfile}} placeholder to be replaced with actual user data.
+ */
 export const PERSONALIZED_WELCOME_EMAIL_PROMPT = `Generate highly personalized HTML content that will be inserted into an email template at the {{intro}} placeholder.
 
 User profile data:
@@ -47,6 +52,11 @@ Example personalized outputs (showing obvious customization with TWO sentences):
 
 <p class="mobile-text" style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">You're all set! Since you're new to investing, we've designed simple tools to help you build confidence while learning the <strong>healthcare sector</strong> you're interested in. Our beginner-friendly alerts will guide you without the confusing jargon.</p>`
 
+/**
+ * AI prompt template for generating daily market news summaries in HTML format.
+ * Used with Gemini to create formatted, readable news content for email delivery.
+ * Expects {{newsData}} placeholder to be replaced with actual news articles.
+ */
 export const NEWS_SUMMARY_EMAIL_PROMPT = `Generate HTML content for a market news summary email that will be inserted into the NEWS_SUMMARY_EMAIL_TEMPLATE at the {{newsContent}} placeholder.
 
 News data to summarize:
@@ -198,6 +208,11 @@ Apple Stock Jumped After Great Earnings Report
 </div>
 </div>`
 
+/**
+ * AI prompt template for mapping Finnhub stock symbols to TradingView symbols.
+ * Used to find correct TradingView symbol format for displaying charts.
+ * Expects {{symbol}}, {{company}}, {{exchange}}, {{currency}}, {{country}} placeholders.
+ */
 export const TRADINGVIEW_SYMBOL_MAPPING_PROMPT = `You are an expert in financial markets and trading platforms. Your task is to find the correct TradingView symbol that corresponds to a given Finnhub stock symbol.
 
 Stock information from Finnhub:
