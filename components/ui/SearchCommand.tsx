@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useState, useCallback } from "react"
-import { CommandDialog, CommandEmpty, CommandInput, CommandList } from "@/components/ui/command"
+import { useEffect, useState, useCallback, useRef } from "react"
+import { Command, CommandDialog, CommandEmpty, CommandInput, CommandList } from "@/components/ui/command"
 import { Button } from "@/components/ui/button"
 import { Loader2, TrendingUp } from "lucide-react"
 import Link from "next/link"
@@ -32,10 +32,12 @@ export default function SearchCommand({
     const [loading, setLoading] = useState(false)
     const [stocks, setStocks] = useState<StockWithWatchlistStatus[]>(initialStocks)
 
+    // Tracks current query to ignore stale async responses
+    const currentQueryRef = useRef<string>("")
+
     const isSearchMode = !!searchTerm?.trim()
     const displayStocks = isSearchMode ? stocks : stocks?.slice(0, 10)
 
-    // Keep stocks state in sync if initialStocks changes from parent
     useEffect(() => {
         if (!searchTerm?.trim()) {
             setStocks(initialStocks)
@@ -55,20 +57,29 @@ export default function SearchCommand({
 
     const handleSearch = useCallback(async (query?: string) => {
         const cleanQuery = typeof query === 'string' ? query.trim() : ''
+        currentQueryRef.current = cleanQuery
 
         if (!cleanQuery) {
             setStocks(initialStocks)
+            setLoading(false)
             return
         }
 
         setLoading(true)
         try {
             const results = await searchStocks(cleanQuery)
-            setStocks(results)
+            // Ignore response if user has typed a newer query since request started
+            if (currentQueryRef.current === cleanQuery) {
+                setStocks(results)
+            }
         } catch {
-            setStocks([])
+            if (currentQueryRef.current === cleanQuery) {
+                setStocks([])
+            }
         } finally {
-            setLoading(false)
+            if (currentQueryRef.current === cleanQuery) {
+                setLoading(false)
+            }
         }
     }, [initialStocks])
 
@@ -95,51 +106,53 @@ export default function SearchCommand({
                     {label}
                 </Button>
             )}
-            <CommandDialog open={open} onOpenChange={setOpen} className="search-dialog">
-                <div className="search-field">
-                    <CommandInput
-                        value={searchTerm}
-                        onValueChange={setSearchTerm}
-                        placeholder="Search stocks..."
-                        className="search-input"
-                    />
-                    {loading && <Loader2 className="search-loader animate-spin" />}
-                </div>
-                <CommandList className="search-list">
-                    {loading ? (
-                        <CommandEmpty className="search-list-empty">Loading stocks...</CommandEmpty>
-                    ) : displayStocks?.length === 0 ? (
-                        <div className="search-list-indicator p-4 text-center text-sm text-gray-500">
-                            {isSearchMode ? 'No results found' : 'No stocks available'}
-                        </div>
-                    ) : (
-                        <ul>
-                            <div className="search-count p-2 text-xs font-semibold text-gray-400">
-                                {isSearchMode ? 'Search results' : 'Popular stocks'}
-                                {` `}({displayStocks?.length || 0})
+            <CommandDialog open={open} onOpenChange={setOpen}>
+                <Command className="search-dialog">
+                    <div className="search-field">
+                        <CommandInput
+                            value={searchTerm}
+                            onValueChange={setSearchTerm}
+                            placeholder="Search stocks..."
+                            className="search-input"
+                        />
+                        {loading && <Loader2 className="search-loader animate-spin" />}
+                    </div>
+                    <CommandList className="search-list">
+                        {loading ? (
+                            <CommandEmpty className="search-list-empty">Loading stocks...</CommandEmpty>
+                        ) : displayStocks?.length === 0 ? (
+                            <div className="search-list-indicator p-4 text-center text-sm text-gray-500">
+                                {isSearchMode ? 'No results found' : 'No stocks available'}
                             </div>
-                            {displayStocks?.map((stock) => (
-                                <li key={stock.symbol} className="search-item">
-                                    <Link
-                                        href={`/stocks/${stock.symbol}`}
-                                        onClick={handleSelectStock}
-                                        className="search-item-link flex items-center gap-3 p-2 hover:bg-accent rounded-md"
-                                    >
-                                        <TrendingUp className="h-4 w-4 text-gray-500" />
-                                        <div className="flex-1">
-                                            <div className="search-item-name font-medium">
-                                                {stock.name}
+                        ) : (
+                            <ul>
+                                <div className="search-count p-2 text-xs font-semibold text-gray-400">
+                                    {isSearchMode ? 'Search results' : 'Popular stocks'}
+                                    {` `}({displayStocks?.length || 0})
+                                </div>
+                                {displayStocks?.map((stock) => (
+                                    <li key={stock.symbol} className="search-item">
+                                        <Link
+                                            href={`/stocks/${stock.symbol}`}
+                                            onClick={handleSelectStock}
+                                            className="search-item-link flex items-center gap-3 p-2 hover:bg-accent rounded-md"
+                                        >
+                                            <TrendingUp className="h-4 w-4 text-gray-500" />
+                                            <div className="flex-1">
+                                                <div className="search-item-name font-medium">
+                                                    {stock.name}
+                                                </div>
+                                                <div className="text-sm text-gray-500">
+                                                    {stock.symbol} | {stock.exchange} | {stock.type}
+                                                </div>
                                             </div>
-                                            <div className="text-sm text-gray-500">
-                                                {stock.symbol} | {stock.exchange} | {stock.type}
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </CommandList>
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </CommandList>
+                </Command>
             </CommandDialog>
         </>
     )
