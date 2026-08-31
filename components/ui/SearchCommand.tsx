@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useCallback, useRef } from "react"
-import { Command, CommandDialog, CommandEmpty, CommandInput, CommandList } from "@/components/ui/command"
+import { CommandDialog, CommandEmpty, CommandInput, CommandList } from "@/components/ui/command"
 import { Button } from "@/components/ui/button"
 import { Loader2, TrendingUp } from "lucide-react"
 import Link from "next/link"
@@ -107,52 +107,50 @@ export default function SearchCommand({
                 </Button>
             )}
             <CommandDialog open={open} onOpenChange={setOpen}>
-                <Command className="search-dialog">
-                    <div className="search-field">
-                        <CommandInput
-                            value={searchTerm}
-                            onValueChange={setSearchTerm}
-                            placeholder="Search stocks..."
-                            className="search-input"
-                        />
-                        {loading && <Loader2 className="search-loader animate-spin" />}
-                    </div>
-                    <CommandList className="search-list">
-                        {loading ? (
-                            <CommandEmpty className="search-list-empty">Loading stocks...</CommandEmpty>
-                        ) : displayStocks?.length === 0 ? (
-                            <div className="search-list-indicator p-4 text-center text-sm text-gray-500">
-                                {isSearchMode ? 'No results found' : 'No stocks available'}
+                <div className="relative border-b border-gray-800 px-3 py-2 flex items-center">
+                    <CommandInput
+                        value={searchTerm}
+                        onValueChange={setSearchTerm}
+                        placeholder="Search stocks..."
+                        className="w-full bg-transparent outline-none text-white text-sm"
+                    />
+                    {loading && <Loader2 className="h-4 w-4 animate-spin text-gray-400 ml-2" />}
+                </div>
+                <CommandList className="max-h-[300px] overflow-y-auto p-2">
+                    {loading ? (
+                        <CommandEmpty className="py-6 text-center text-sm text-gray-400">Loading stocks...</CommandEmpty>
+                    ) : displayStocks?.length === 0 ? (
+                        <div className="py-6 text-center text-sm text-gray-500">
+                            {isSearchMode ? 'No results found' : 'No stocks available'}
+                        </div>
+                    ) : (
+                        <ul>
+                            <div className="px-2 py-1.5 text-xs font-semibold text-gray-400">
+                                {isSearchMode ? 'Search results' : 'Popular stocks'}
+                                {` `}({displayStocks?.length || 0})
                             </div>
-                        ) : (
-                            <ul>
-                                <div className="search-count p-2 text-xs font-semibold text-gray-400">
-                                    {isSearchMode ? 'Search results' : 'Popular stocks'}
-                                    {` `}({displayStocks?.length || 0})
-                                </div>
-                                {displayStocks?.map((stock) => (
-                                    <li key={stock.symbol} className="search-item">
-                                        <Link
-                                            href={`/stocks/${stock.symbol}`}
-                                            onClick={handleSelectStock}
-                                            className="search-item-link flex items-center gap-3 p-2 hover:bg-accent rounded-md"
-                                        >
-                                            <TrendingUp className="h-4 w-4 text-gray-500" />
-                                            <div className="flex-1">
-                                                <div className="search-item-name font-medium">
-                                                    {stock.name}
-                                                </div>
-                                                <div className="text-sm text-gray-500">
-                                                    {stock.symbol} | {stock.exchange} | {stock.type}
-                                                </div>
+                            {displayStocks?.map((stock) => (
+                                <li key={stock.symbol} className="my-1">
+                                    <Link
+                                        href={`/stocks/${stock.symbol}`}
+                                        onClick={handleSelectStock}
+                                        className="flex items-center gap-3 p-2 hover:bg-gray-800/80 rounded-md transition-colors"
+                                    >
+                                        <TrendingUp className="h-4 w-4 text-gray-400" />
+                                        <div className="flex-1 min-w-0">
+                                            <div className="font-medium text-white truncate text-sm">
+                                                {stock.name}
                                             </div>
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </CommandList>
-                </Command>
+                                            <div className="text-xs text-gray-400">
+                                                {stock.symbol} | {stock.exchange} | {stock.type}
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </CommandList>
             </CommandDialog>
         </>
     )
