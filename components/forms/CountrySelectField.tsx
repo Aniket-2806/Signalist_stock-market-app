@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Control, Controller, FieldError } from 'react-hook-form';
+import { Control, Controller, FieldError, FieldValues, FieldPath } from 'react-hook-form';
 import {
     Popover,
     PopoverContent,
@@ -20,10 +20,11 @@ import { Check, ChevronsUpDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import countryList from 'react-select-country-list';
 
-type CountrySelectProps = {
-    name: string;
+// Use Generics (T extends FieldValues) to accept any specific form control
+export type CountrySelectProps<T extends FieldValues> = {
+    name: FieldPath<T>;
     label: string;
-    control: Control<any>;
+    control: Control<T>;
     error?: FieldError;
     required?: boolean;
 };
@@ -36,7 +37,6 @@ const CountrySelect = ({
     onChange: (value: string) => void;
 }) => {
     const [open, setOpen] = useState(false);
-
     const countries = countryList().getData();
 
     const getFlagEmoji = (countryCode: string) => {
@@ -55,7 +55,7 @@ const CountrySelect = ({
                 {value ? (
                     <span className='flex items-center gap-2'>
                         <span>{getFlagEmoji(value)}</span>
-                        <span>{countries.find((c) => c.value === value)?.label}</span>
+                        <span>{countries.find((c) => c.value === value)?.label || value}</span>
                     </span>
                 ) : (
                     'Select your country...'
@@ -106,13 +106,14 @@ const CountrySelect = ({
     );
 };
 
-export const CountrySelectField = ({
-                                       name,
-                                       label,
-                                       control,
-                                       error,
-                                       required = false,
-                                   }: CountrySelectProps) => {
+// Make the component itself generic
+export const CountrySelectField = <T extends FieldValues>({
+                                                              name,
+                                                              label,
+                                                              control,
+                                                              error,
+                                                              required = false,
+                                                          }: CountrySelectProps<T>) => {
     return (
         <div className='space-y-2'>
             <Label htmlFor={name} className='form-label'>

@@ -21,7 +21,9 @@ interface MarketNewsArticle {
 export const sendSignUpEmail = inngest.createFunction(
     {
         id: 'sign-up-email',
-        event: 'app/user.created',
+        triggers: [
+            { event: 'app/user.created' }
+        ],
     },
     async ({ event, step }) => {
         const userProfile = `
