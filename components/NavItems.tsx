@@ -1,41 +1,52 @@
 'use client'
 
-import {NAV_ITEMS} from "@/lib/constants";
+import { NAV_ITEMS } from "@/lib/constants";
 import Link from "next/link";
-import {usePathname} from "next/navigation";
-import SearchCommand from "@/components/ui/SearchCommand";
+import { usePathname } from "next/navigation";
+import SearchCommand, { StockWithWatchlistStatus } from "@/components/ui/SearchCommand";
 
-const NavItems = ({initialStocks}: { initialStocks: StockWithWatchlistStatus[]}) => {
-    const pathname = usePathname()
+interface NavItemsProps {
+    initialStocks: StockWithWatchlistStatus[];
+}
+
+const NavItems = ({ initialStocks }: NavItemsProps) => {
+    const pathname = usePathname();
 
     const isActive = (path: string) => {
         if (path === '/') return pathname === '/';
-
         return pathname.startsWith(path);
-    }
+    };
 
     return (
-        <ul className="flex flex-col sm:flex-row p-2 gap-3 sm:gap-10 font-medium">
+        <ul className="flex flex-col sm:flex-row p-2 gap-3 sm:gap-10 font-medium items-center">
             {NAV_ITEMS.map(({ href, label }) => {
-                if(href === '/search') return (
-                    <li key="search-trigger">
-                        <SearchCommand
-                            renderAs="text"
-                            label="Search"
-                            initialStocks={initialStocks}
-                        />
-                    </li>
-                )
+                if (href === '/search') {
+                    return (
+                        <li key="search-trigger" className="cursor-pointer hover:text-yellow-500 transition-colors">
+                            <SearchCommand
+                                renderAs="text"
+                                label="Search"
+                                initialStocks={initialStocks}
+                            />
+                        </li>
+                    );
+                }
 
-                return <li key={href}>
-                    <Link href={href} className={`hover:text-yellow-500 transition-colors ${
-                        isActive(href) ? 'text-gray-100' : ''
-                    }`}>
-                        {label}
-                    </Link>
-                </li>
+                return (
+                    <li key={href}>
+                        <Link
+                            href={href}
+                            className={`transition-colors hover:text-yellow-500 ${
+                                isActive(href) ? 'text-gray-100 font-semibold' : 'text-gray-400'
+                            }`}
+                        >
+                            {label}
+                        </Link>
+                    </li>
+                );
             })}
         </ul>
-    )
-}
-export default NavItems
+    );
+};
+
+export default NavItems;
